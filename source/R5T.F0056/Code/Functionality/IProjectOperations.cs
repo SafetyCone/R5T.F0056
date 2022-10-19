@@ -63,7 +63,7 @@ namespace R5T.F0056
 			//var description = ; // Get from project plan.
 			//var repositoryUrl = ;// Get from repository.
 
-			Instances.ProjectFileOperator.InProjectFileContext(
+			Instances.ProjectFileOperator.InModifyProjectFileContext(
 				projectFilePath,
 				projectElement =>
 				{
