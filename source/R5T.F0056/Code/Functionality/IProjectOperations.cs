@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 using R5T.T0132;
 
@@ -131,5 +132,33 @@ namespace R5T.F0056
 					}
 				});
 		}
+
+		public async Task AddProjectReference_AndUpdateSolutions(
+			string projectFilePath,
+			string projectReferenceFilePath)
+        {
+			/// Prior work:
+			/// * (best) ISolutionOperator_AddDependencyProjectReferenceAndRecursiveDependencies_R5T_X0002
+			/// * ISolutionOperator_UpdateSolutionWithProject_R5T_T0113_X0001
+			/// * IFileSystemOperator_FindSolutionFilesInFileDirectoryOrDirectParentDirectories_R5T_T0044_X0001
+			/// * IProjectGenerator_CreateProjectAddProjectReferencesAndUpdateSolution_R5T_T0113_X0001
+
+			// Add the project reference to the project.
+			await Instances.ProjectFileOperator.AddProjectReference_Idempotent(
+				projectFilePath,
+				projectReferenceFilePath);
+
+			// Get all recursive project references of the project, inclusive.
+			var allProjectReferenceFilePaths = await F0016.F001.ProjectReferencesOperator.Instance.GetAllRecursiveProjectReferences_Inclusive(
+				projectFilePath);
+
+			// Get all solution files in parent directories of the project directory, which contain the project file.
+			var solutionFilePaths = Instances.SolutionOperations.GetSolutionFilePathsContainingProject(
+				projectFilePath);
+
+			F0063.F001.SolutionOperator.Instance.AddDependencyProjects_Idempotent(
+				solutionFilePaths,
+				allProjectReferenceFilePaths);
+        }
 	}
 }
