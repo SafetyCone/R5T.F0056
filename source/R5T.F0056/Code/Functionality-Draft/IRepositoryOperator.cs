@@ -21,7 +21,7 @@ namespace R5T.F0056
 		{
 			var pushAllChangesResult = Instances.GitHubOperator.PushAllChanges(
 				repositoryLocalDirectoryPath,
-				Instances.CommitMessages.InitialCommit,
+				Instances.CommitMessages.InitialCommit.Value,
 				logger);
 
 			return pushAllChangesResult;
