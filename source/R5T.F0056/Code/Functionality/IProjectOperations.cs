@@ -157,17 +157,23 @@ namespace R5T.F0056
 				projectFilePath,
 				projectReferenceFilePath);
 
-			// Get all recursive project references of the project, inclusive.
-			var allProjectReferenceFilePaths = await F0016.F001.ProjectReferencesOperator.Instance.GetAllRecursiveProjectReferences_Inclusive(
-				projectFilePath);
+			await this.UpdateSolutions(projectFilePath);
+        }
 
-			// Get all solution files in parent directories of the project directory, which contain the project file.
-			var solutionFilePaths = Instances.SolutionOperations.GetSolutionFilePathsContainingProject(
-				projectFilePath);
+		public async Task UpdateSolutions(
+            string projectFilePath)
+		{
+            // Get all recursive project references of the project, inclusive.
+            var allProjectReferenceFilePaths = await F0016.F001.ProjectReferencesOperator.Instance.GetAllRecursiveProjectReferences_Inclusive(
+                projectFilePath);
 
-			F0063.F001.SolutionOperator.Instance.AddDependencyProjects_Idempotent(
-				solutionFilePaths,
-				allProjectReferenceFilePaths);
+            // Get all solution files in parent directories of the project directory, which contain the project file.
+            var solutionFilePaths = Instances.SolutionOperations.GetSolutionFilePathsContainingProject(
+                projectFilePath);
+
+            F0063.F001.SolutionOperator.Instance.AddDependencyProjects_Idempotent(
+                solutionFilePaths,
+                allProjectReferenceFilePaths);
         }
 	}
 }
