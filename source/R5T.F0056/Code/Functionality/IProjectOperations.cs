@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -160,7 +161,41 @@ namespace R5T.F0056
 			await this.UpdateSolutions(projectFilePath);
         }
 
-		public async Task UpdateSolutions(
+        /// <summary>
+		/// <inheritdoc cref="F0016.F001.IProjectReferencesOperator.Ensure_HasProjectReferences(string, IEnumerable{string})" path="/summary"/>
+		/// Also updates containing solutions if any project references were added.
+		/// </summary>
+		/// <returns>
+		/// <inheritdoc cref="F0016.F001.IProjectReferencesOperator.Ensure_HasProjectReferences(string, IEnumerable{string})" path="/returns"/>
+		/// </returns>
+        public async Task<string[]> Ensure_HasProjectReferences(
+            string projectFilePath,
+            IEnumerable<string> projectReferenceFilePaths)
+        {
+			var projectReferencesAdded = await Instances.ProjectReferencesOperator.Ensure_HasProjectReferences(
+				projectFilePath,
+				projectReferenceFilePaths);
+
+			var anyProjectReferencesAdded = projectReferencesAdded.Any();
+			if (anyProjectReferencesAdded)
+			{
+				await this.UpdateSolutions(projectFilePath);
+			}
+
+			return projectReferencesAdded;
+        }
+
+        /// <inheritdoc cref="Ensure_HasProjectReferences(string, IEnumerable{string})"/>
+        public Task<string[]> Ensure_HasProjectReferences(
+            string projectFilePath,
+            params string[] projectReferenceFilePaths)
+        {
+            return this.Ensure_HasProjectReferences(
+                projectFilePath,
+                projectReferenceFilePaths.AsEnumerable());
+        }
+
+        public async Task UpdateSolutions(
             string projectFilePath)
 		{
             // Get all recursive project references of the project, inclusive.
