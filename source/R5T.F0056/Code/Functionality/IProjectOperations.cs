@@ -53,7 +53,7 @@ namespace R5T.F0056
 			};
 			var company = "Rivet";
 			var copyrightHolder = company;
-			var copyrightText = $"Copyright (c) {copyrightHolder} {F0000.Instances.NowOperator.GetNow_Local().Year}";
+			var copyrightText = $"Copyright (c) {copyrightHolder} {F0000.Instances.NowOperator.Get_Now_Local().Year}";
 			//var packageReadmeFileRelativePath = "Project Plan.md";
 			var requireLicenseAcceptance = true;
 
