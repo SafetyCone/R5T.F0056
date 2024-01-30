@@ -14,14 +14,14 @@ namespace R5T.F0056
         {
 			var output = this.FindFilesInDirectoryOrParentDirectories(
 				directoryPath,
-				F0050.SearchPatternGenerator.Instance.AllSolutionFiles());
+				Instances.SearchPatternGenerator.For_SolutionFiles());
 
 			return output;
         }
 
 		public IEnumerable<string> FindSolutionFilesInDirectoryOfFileOrParentDirectories(string filePath)
 		{
-			var directoryPath = F0002.PathOperator.Instance.GetFileParentDirectoryPath(filePath);
+			var directoryPath = F0002.PathOperator.Instance.Get_ParentDirectoryPath_ForFile(filePath);
 
 			var output = this.FindSolutionFilesInDirectoryOrParentDirectories(directoryPath);
 			return output;
