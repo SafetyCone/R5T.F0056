@@ -8,7 +8,7 @@ namespace R5T.F0056
         public static Z0036.ICommitMessages CommitMessages => Z0036.CommitMessages.Instance;
         public static IFileSystemOperator FileSystemOperator => F0056.FileSystemOperator.Instance;
         public static F0041.IGitHubOperator GitHubOperator => F0041.GitHubOperator.Instance;
-        public static F0019.IGitOperator GitOperator => F0019.GitOperator.Instance;
+        public static L0083.F001.IGitOperator GitOperator => L0083.F001.GitOperator.Instance;
         public static ILicenseIdentifiers LicenseIdentifiers => F0056.LicenseIdentifiers.Instance;
         public static F0020.IProjectFileOperator ProjectFileOperator => F0020.ProjectFileOperator.Instance;
         public static F0051.IProjectOperator ProjectOperator => F0051.ProjectOperator.Instance;

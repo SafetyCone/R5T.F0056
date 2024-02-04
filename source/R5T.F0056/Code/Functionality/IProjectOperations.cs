@@ -113,7 +113,7 @@ namespace R5T.F0056
 					}
 					else
 					{
-						var repositoryDirectoryPath = Instances.GitOperator.GetRepositoryDirectoryPath(projectFilePath);
+						var repositoryDirectoryPath = Instances.GitOperator.Get_RepositoryDirectoryPath(projectFilePath);
 						var licenseFilePath = Instances.RepositoryPathsOperator.GetLicenseFilePath(repositoryDirectoryPath);
 						var licenseTextLines = F0000.Instances.FileSystemOperator.ReadText_Lines(licenseFilePath);
 						var licenseExpression = Instances.Strings.NoLicenseFoundExpression;
@@ -131,7 +131,7 @@ namespace R5T.F0056
 					projectXmlOperator.SetPackageRequireLicenseAcceptance(projectElement, requireLicenseAcceptance);
 
 					// Repository URL.
-					var repositoryUrl = Instances.GitOperator.GetRepositoryRemoteUrl(projectFilePath);
+					var repositoryUrl = Instances.GitOperator.Get_RepositoryRemoteUrl(projectFilePath);
 					projectXmlOperator.SetRepositoryUrl(projectElement, repositoryUrl);
 
 					// Package tags.
